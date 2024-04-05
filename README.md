@@ -24,7 +24,7 @@ The notification will be sent using HTTP POST request, so you need to make the r
 
 ## API Documentations
 
-You can download the Postman Collection JSON here: https://api.postman.com/collections/1518342-1ab29a75-95d2-4e61-a257-0971e15b75a0?access_key=PMAT-01HT9WP343FDK3QKB7HGE2AKHJ
+You can download the Postman Collection JSON here: https://ristek.link/AdvProgWeek7Postman
 
 After you download the Postman Collection, you can try the endpoints inside "BambangShop Receiver" folder.
 
