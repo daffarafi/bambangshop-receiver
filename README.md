@@ -86,4 +86,20 @@ This is the place for you to write reflections:
 
 #### Reflection Subscriber-1
 
+1. In this tutorial, we used RwLock<> to synchronise the use of Vec of Notifications. Explain why it is necessary for this case, and explain why we do not use Mutex<> instead?
+
+    Jawab:
+
+    Dalam tutorial ini, penggunaan RwLock<> untuk menyinkronkan penggunaan Vec dari Notifikasi diperlukan karena kita ingin memastikan akses ke Vec tersebut dapat dilakukan secara aman oleh banyak thread secara konkuren. RwLock<> memungkinkan multiple reader (pembaca) atau satu writer (penulis) pada satu waktu. Dalam konteks tutorial ini, kita ingin memungkinkan banyak thread untuk membaca data notifikasi yang disimpan dalam Vec, sementara hanya satu thread yang dapat menulis (menambah atau menghapus) data notifikasi. Oleh karena itu, RwLock<> cocok digunakan untuk kasus ini.
+
+    Mengapa tidak menggunakan Mutex<>? Mutex<> akan membatasi akses ke data notifikasi menjadi satu thread pada satu waktu, baik untuk operasi membaca maupun menulis. Ini akan mengakibatkan kinerja yang buruk terutama dalam skenario di mana banyak thread hanya ingin membaca data notifikasi tanpa melakukan operasi penulisan. RwLock<> memberikan fleksibilitas dengan memungkinkan multiple reader sekaligus satu writer, yang lebih sesuai dengan kebutuhan dalam kasus ini.
+
+2. In this tutorial, we used lazy_static external library to define Vec and DashMap as a “static” variable. Compared to Java where we can mutate the content of a static variable via a static function, why did not Rust allow us to do so?
+
+    Jawab:
+
+    Dalam Rust, variabel statis dideklarasikan dengan kata kunci "static". Secara default, variabel statis bersifat immutable (tidak dapat diubah), dan Rust tidak mengizinkan perubahan nilai variabel statis setelah deklarasi. Ini adalah keputusan desain yang sengaja dibuat untuk mencegah masalah thread-safety yang mungkin timbul akibat perubahan nilai variabel statis dari berbagai thread secara konkuren. Rust mendorong paradigma pemrograman yang aman secara thread, dan membatasi mutasi variabel statis adalah salah satu cara untuk mencapai tujuan tersebut.
+
+    Dalam Java, meskipun Anda dapat mengubah konten dari variabel statis melalui fungsi statis, hal ini dapat menyebabkan masalah konkurensi jika tidak dilakukan dengan hati-hati. Java menyediakan mekanisme untuk mengunci variabel statis menggunakan kata kunci "synchronized" atau "volatile" untuk memastikan akses yang aman dari thread yang berbeda. Dalam Rust, pendekatan yang berbeda digunakan dengan menggunakan RwLock<> atau Mutex<> untuk menyinkronkan akses ke variabel statis saat diperlukan.
+
 #### Reflection Subscriber-2
