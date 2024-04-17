@@ -103,3 +103,23 @@ This is the place for you to write reflections:
     Dalam Java, meskipun Anda dapat mengubah konten dari variabel statis melalui fungsi statis, hal ini dapat menyebabkan masalah konkurensi jika tidak dilakukan dengan hati-hati. Java menyediakan mekanisme untuk mengunci variabel statis menggunakan kata kunci "synchronized" atau "volatile" untuk memastikan akses yang aman dari thread yang berbeda. Dalam Rust, pendekatan yang berbeda digunakan dengan menggunakan RwLock<> atau Mutex<> untuk menyinkronkan akses ke variabel statis saat diperlukan.
 
 #### Reflection Subscriber-2
+
+1. Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+
+    Jawab:
+    
+    Saya menjelajahi kode di luar langkah-langkah tutorial untuk memahami bagaimana komponen-komponen sistem notifikasi terstruktur dan bekerja. Dengan begitu saya mendapatkan wawasan tentang bagaimana pola Observer diimplementasikan, bagaimana notifikasi ditangani, dan bagaimana Vec dari notifikasi disinkronkan menggunakan RwLock.
+
+2. Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?
+
+    Jawab:
+
+    Terkait pengujian sistem notifikasi dengan memunculkan beberapa instans dari Receiver, saya menemukan bahwa pola Observer memang memudahkan proses penambahan lebih banyak subscriber. Dengan hanya membuat instans baru dari Receiver dan mendaftarkannya sebagai subscriber ke Publisher, saya dapat dengan mudah memperluas sistem untuk menampung receiver tambahan tanpa harus mengubah logika inti dari sistem.
+
+    Mengenai memunculkan lebih dari satu instans dari Main app, masih relatif mudah untuk menambahkannya ke dalam sistem. Karena Publisher menangani distribusi notifikasi kepada semua subscriber yang terdaftar, menambahkan lebih banyak instans dari Main app tidak akan memerlukan perubahan yang signifikan pada kode yang sudah ada. Setiap instans dari Main app akan bertindak sebagai subscriber independen, menerima notifikasi saat dipublikasikan oleh Publisher.
+
+3. Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+
+    Jawab:
+
+    Dalam hal pengujian, saya melakuakan test untuk memvalidasi fungsionalitas sistem notifikasi. Selain itu, saya juga meningkatkan dokumentasi pada koleksi Postman saya dengan memberikan deskripsi yang detail untuk setiap endpoint API, termasuk format permintaan yang diharapkan dan struktur respons. Fitur-fitur ini berguna baik untuk pekerjaan tutorial maupun proyek kelompok saya, karena membantu memastikan kebenaran dan kehandalan dari fungsionalitas yang diimplementasikan.
